@@ -52,40 +52,6 @@ set fileencodings=utf-8,cp949
 " ctags setting
 set tag=./tags;/ " easy-tag
 
-" tags를 비동기로 불러와준다. (필수) tag사이즈가 커지게 되면 vim이 블록되는 
-" 시간이 길어져서 답답하다
-let g:easytags_async=1
-
-" highlight를 켜면 좋지만 이것도 속도가 느려진다.
-let g:easytags_auto_highlight = 0
-
-" struct의 멤버변수들도 추적이 된다.
-let g:easytags_include_members = 1
-
-" 현재 프로젝트에서 쓰는 tags파일을 우선 로드하고 없을 경우 global tags를
-" 로드한다.
-let g:easytags_dynamic_files = 1
-
-" linuxsty config
-" let g:linuxsty_patterns = [ "/home/kjh/git/kernel/*" ]
-
-" cscope setting
-" function! LoadCscope()
-"     let db = findfile("cscope.out", ".;")
-"     if (!empty(db))
-"         let path = strpart(db, 0, match(db, "/cscope.out$"))
-"         set nocscopeverbose " suppress 'duplicate connection' error
-"         exe "cs add " . db . " " . path
-"         set cscopeverbose
-"         " else add the database pointed to by
-"         " environment variable
-"         "   elseif $CSCOPE_DB != ""
-"         cs add $CSCOPE_DB
-"     endif
-" endfunction
-" au BufEnter /* call LoadCscope()
-
-
 " Tagbar setting
 nmap <F8> :TagbarToggle<CR>
 
@@ -94,7 +60,6 @@ nmap <F8> :TagbarToggle<CR>
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 
 " let Vundle manage Vundle, required
 "
@@ -116,4 +81,11 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 colorschem elflord
+
+" Over 80line
 autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
+set textwidth=80
+set colorcolumn=81
+
+set visualbell
+set t_vb=

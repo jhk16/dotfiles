@@ -156,26 +156,7 @@ branch_color ()
 
 export PS1='\u@\h\[${c_sgr0}\]:\w\[${c_sgr0}\] (\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\])\n\$ '
 
-# Add pmu-tools (Ex: toplev.py)
-export PATH=$PATH:/home/kjh/git/pmu-tools
-# Add intel-cmt-cat (Ex: pqos)
-#export PATH=$PATH:/home/kjh/git/intel-cmt-cat/pqos
-# Add perf
-export PATH=$PATH:/home/kjh/git/exchange/tools/perf
 # enable sudo command
 alias sudo='sudo env PATH=$PATH'
 
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-PATH="/home/kjh/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/kjh/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/kjh/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/kjh/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/kjh/perl5"; export PERL_MM_OPT;
-export PATH=$PATH:/home/kjh/git/benchmark/SPECjbb2015/apache-maven-3.0.4/apache-maven/src/bin
-# swarm09
-export SPARK_HOME=/opt/spark-2.1.0
-export PATH=$SPECjbb2015/bin:$PATH
-source /home/kjh/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64
-#source /home/kjh/intel/parallel_studio_xe_2019/bin/psxevars.sh
