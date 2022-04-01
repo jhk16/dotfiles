@@ -80,7 +80,9 @@ call vundle#end()            " required
 
 filetype plugin indent on    " required
 
-colorschem elflord
+set background=dark
+colorscheme PaperColor
+" colorschem elflord
 
 " Over 80line
 autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
