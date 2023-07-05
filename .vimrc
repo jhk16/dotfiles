@@ -13,7 +13,7 @@ au BufReadPost *
 " Spaces & Tabs
 set tabstop=8		" number of visual spaces per TAB
 set softtabstop=8	" number of spaces in tab when editing
-"set expandtab		" tabs are spaces
+" set expandtab		" tabs are spaces
 set autoindent
 set cindent
 set smartindent
@@ -22,12 +22,14 @@ set shiftwidth=8
 set ru
 
 " UI Config
-set number			" show line numbers
+set number		" show line numbers
 set showcmd 		" show command in bottom bar
-" set mouse=a
+"set mouse=a
+set cursorline
 
 " Set cursorline
 set wildmenu		" visual autocomplete for command menu
+"set wildmode:list:longest
 set lazyredraw		" redraw only when we need to
 set showmatch		" highlight matching [{()}]
 set display+=lastline
@@ -56,7 +58,7 @@ set tag=./tags;/ " easy-tag
 nmap <F8> :TagbarToggle<CR>
 
 " clone Vundle source
-" $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -65,16 +67,20 @@ call vundle#begin()
 "
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'nanotech/jellybeans.vim'
+" Plugin 'nanotech/jellybeans.vim'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 Plugin 'junegunn/fzf'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'ronakg/quickr-cscope.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'rhysd/vim-grammarous'
+"Plugin 'dense-analysis/ale'
+"Plugin 'fatih/vim-go'
+Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()            " required
 
@@ -85,9 +91,37 @@ colorscheme PaperColor
 " colorschem elflord
 
 " Over 80line
-autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
+" autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
 set textwidth=80
 set colorcolumn=81
 
 set visualbell
 set t_vb=
+
+" autocmd BufNewFile readme.md 0r ~/skeletons/readme.md
+autocmd BufNewFile *.sh 0r ~/skeletons/bash.sh
+
+"Comment on/off
+func! CmtOn_c()
+	exe "'<,'>norm i//"
+endfunc
+func! CmtOn_sh()
+	exe "'<,'>norm i#"
+endfunc
+func! CmtOff_c()
+	exe "'<,'>norm 2x"
+endfunc
+func! CmtOff_sh()
+	exe "'<,'>norm 1x"
+endfunc
+
+autocmd filetype c,cpp vmap <c-k> <esc>:call  CmtOn_c() <cr>
+autocmd filetype c,cpp vmap <c-l> <esc>:call  CmtOff_c() <cr>
+autocmd filetype c,cpp nmap <c-k> <esc>v:call CmtOn_c() <cr>
+autocmd filetype c,cpp nmap <c-l> <esc>v:call CmtOff_c() <cr>
+
+autocmd filetype python,sh vmap <c-k> <esc>:call CmtOn_sh() <cr>
+autocmd filetype python,sh vmap <c-l> <esc>:call CmtOff_sh() <cr>
+autocmd filetype python,sh nmap <c-k> <esc>v:call CmtOn_sh() <cr>
+autocmd filetype python,sh nmap <c-l> <esc>v:call CmtOff_sh() <cr>
+>>>>>>> Stashed changes
