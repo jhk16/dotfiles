@@ -99,7 +99,7 @@ set visualbell
 set t_vb=
 
 " autocmd BufNewFile readme.md 0r ~/skeletons/readme.md
-autocmd BufNewFile *.sh 0r ~/skeletons/bash.sh
+autocmd BufNewFile *.sh 0r ~/.skeletons/bash.sh
 
 "Comment on/off
 func! CmtOn_c()
@@ -124,4 +124,3 @@ autocmd filetype python,sh vmap <c-k> <esc>:call CmtOn_sh() <cr>
 autocmd filetype python,sh vmap <c-l> <esc>:call CmtOff_sh() <cr>
 autocmd filetype python,sh nmap <c-k> <esc>v:call CmtOn_sh() <cr>
 autocmd filetype python,sh nmap <c-l> <esc>v:call CmtOff_sh() <cr>
->>>>>>> Stashed changes
