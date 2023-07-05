@@ -80,7 +80,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'rhysd/vim-grammarous'
 "Plugin 'dense-analysis/ale'
 "Plugin 'fatih/vim-go'
-Plugin 'wakatime/vim-wakatime'
+"Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()            " required
 
