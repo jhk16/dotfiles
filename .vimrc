@@ -67,20 +67,13 @@ call vundle#begin()
 "
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
-" Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'nanotech/jellybeans.vim'
 Plugin 'godlygeek/tabular'
-" Plugin 'plasticboy/vim-markdown'
 Plugin 'junegunn/fzf'
-" Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'ronakg/quickr-cscope.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'rhysd/vim-grammarous'
-"Plugin 'dense-analysis/ale'
-"Plugin 'fatih/vim-go'
-"Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()            " required
 
@@ -88,7 +81,6 @@ filetype plugin indent on    " required
 
 set background=dark
 colorscheme PaperColor
-" colorschem elflord
 
 " Over 80line
 " autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
