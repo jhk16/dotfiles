@@ -8,4 +8,5 @@ cp -r .skeletons ~/
 cp -r .vim ~/
 cp .vimrc ~/
 cp .tmux.conf ~/
+cp .tmux.macro* ~/
 cp .bashrc ~/
