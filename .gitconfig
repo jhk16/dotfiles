@@ -3,10 +3,3 @@
 	email = tome01@ajou.ac.kr
 [core]
 	editor = vim
-[push]
-	;defult = simple
-[sendemail]
-    ; setup for using git send-email; prompts for password
-    smtpuser = tome01forkernel@gmail.com
-    smtpserver = smtp.googlemail.com
-    smtpserverport = 587
