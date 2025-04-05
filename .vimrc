@@ -88,10 +88,10 @@ if (has("termguicolors"))
 endif
 
 " For dark version.
-" set background=dark
+set background=dark
 
 " For light version.
-set background=light
+" set background=light
 
 " Set contrast.
 " This configuration option should be placed before `colorscheme gruvbox-material`.
@@ -110,8 +110,8 @@ let g:airline_theme = 'gruvbox_material'
 colorscheme gruvbox-material
 
 " Over 80line
-autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
-"set textwidth=80
+" autocmd BufWinEnter * match Error /\%>80v.\+\|\s\+$\|^\s*\n\+\%$/
+" set textwidth=80
 set colorcolumn=81
 
 set visualbell
@@ -128,6 +128,7 @@ let mapleader = ","
 
 filetype plugin on
 
+"" TLDR: "CTRL-K" will comment your line
 " Create default mappings
 let g:NERDCreateDefaultMappings = 0
 
@@ -144,8 +145,8 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '/*','right': '*/' } }
 let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
+let g:NERDCustomDelimiters = { 'python': { 'left': '#' } }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 0

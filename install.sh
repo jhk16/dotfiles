@@ -10,3 +10,7 @@ cp .vimrc ~/
 cp .tmux.conf ~/
 cp .tmux.macro* ~/
 cp .bashrc ~/
+
+# FZF for bash
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
