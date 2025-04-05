@@ -50,30 +50,22 @@ set fileencodings=utf-8,cp949
 " ctags setting
 set tag=./tags;/ " easy-tag
 
-" Tagbar setting
-nmap <F8> :TagbarToggle<CR>
+" Let vim-plug manage plugins
+" To install jout type ':PlugInstall'
+call plug#begin('~/.vim/plugged')
 
-" clone Vundle source
-"$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
+Plug 'xolox/vim-misc'
+Plug 'ronakg/quickr-cscope.vim'
+Plug 'majutsushi/tagbar'
+Plug 'rhysd/vim-grammarous'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sainnhe/gruvbox-material'
 
-" let Vundle manage Vundle, required
-"
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'godlygeek/tabular'
-Plugin 'junegunn/fzf'
-Plugin 'xolox/vim-misc'
-Plugin 'ronakg/quickr-cscope.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'rhysd/vim-grammarous'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'sainnhe/gruvbox-material'
-
-call vundle#end()            " required
+call plug#end()
 
 filetype plugin indent on    " required
 
@@ -158,3 +150,8 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 map <c-k> <plug>NERDCommenterToggle
+
+" Tagbar setting
+nnoremap <leader>b :TagbarToggle<CR>
+
+let g:tagbar_position = 'left'
