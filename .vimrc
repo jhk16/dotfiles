@@ -111,7 +111,6 @@ set t_vb=
 
 " autocmd BufNewFile readme.md 0r ~/skeletons/readme.md
 autocmd BufNewFile *.sh 0r ~/.skeletons/bash.sh
-autocmd BufNewFile *.c 0r ~/.skeletons/c.c
 autocmd BufNewFile *.md 0r ~/.skeletons/readme.md
 autocmd BufNewFile *.py 0r ~/.skeletons/python.py
 
@@ -138,6 +137,7 @@ let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
 let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
+let g:NERDCustomDelimiters = { 'c++': { 'left': '//' } }
 let g:NERDCustomDelimiters = { 'python': { 'left': '#' } }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
@@ -155,3 +155,52 @@ map <c-k> <plug>NERDCommenterToggle
 nnoremap <leader>b :TagbarToggle<CR>
 
 let g:tagbar_position = 'left'
+
+" Git commit message option
+autocmd FileType gitcommit set textwidth=71
+autocmd FileType gitcommit set colorcolumn=72
+
+"-----------------------------------------------------------------------"
+" fzf layout
+"-----------------------------------------------------------------------"
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+
+" - down / up / left / right
+let g:fzf_layout = { 'down': '20%' }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Map shortcut 'Ctrl + /'
+nnoremap <silent> <C-_> :FZF<CR>
