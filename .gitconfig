@@ -2,3 +2,13 @@
 	name = Jonghyeon Kim
 [core]
 	editor = vim
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[color]
+	ui = auto
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch

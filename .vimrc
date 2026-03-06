@@ -1,10 +1,13 @@
 syntax on
 
 " Open previous
-au BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\ exe "norm g`\"" |
-\ endif
+augroup restore_cursor_position
+  autocmd!
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "norm g`\"" |
+  \ endif
+augroup END
 
 " Spaces & Tabs
 set tabstop=8		" number of visual spaces per TAB
@@ -110,14 +113,15 @@ set visualbell
 set t_vb=
 
 " autocmd BufNewFile readme.md 0r ~/skeletons/readme.md
-autocmd BufNewFile *.sh 0r ~/.skeletons/bash.sh
-autocmd BufNewFile *.md 0r ~/.skeletons/readme.md
-autocmd BufNewFile *.py 0r ~/.skeletons/python.py
+augroup skeleton_templates
+  autocmd!
+  autocmd BufNewFile *.sh 0r ~/.skeletons/bash.sh
+  autocmd BufNewFile *.md 0r ~/.skeletons/readme.md
+  autocmd BufNewFile *.py 0r ~/.skeletons/python.py
+augroup END
 
 "" NERDcommenter settings
 let mapleader = ","
-
-filetype plugin on
 
 "" TLDR: "CTRL-K" will comment your line
 " Create default mappings
@@ -136,9 +140,11 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
-let g:NERDCustomDelimiters = { 'c++': { 'left': '//' } }
-let g:NERDCustomDelimiters = { 'python': { 'left': '#' } }
+let g:NERDCustomDelimiters = {
+      \ 'c': { 'left': '//' },
+      \ 'c++': { 'left': '//' },
+      \ 'python': { 'left': '#' }
+      \ }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 0
@@ -157,8 +163,11 @@ nnoremap <leader>b :TagbarToggle<CR>
 let g:tagbar_position = 'left'
 
 " Git commit message option
-autocmd FileType gitcommit set textwidth=71
-autocmd FileType gitcommit set colorcolumn=72
+augroup gitcommit_options
+  autocmd!
+  autocmd FileType gitcommit setlocal textwidth=71
+  autocmd FileType gitcommit setlocal colorcolumn=72
+augroup END
 
 "-----------------------------------------------------------------------"
 " fzf layout
@@ -179,9 +188,11 @@ let g:fzf_action = {
 
 " - down / up / left / right
 let g:fzf_layout = { 'down': '20%' }
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup fzf_window_style
+  autocmd!
+  autocmd FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 
