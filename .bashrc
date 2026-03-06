@@ -82,26 +82,33 @@ fi
 export LS_COLORS="di=00;36:fi=00;37"
 
 
-# Prompt with git branch/status when git-prompt is available.
-if [ -r /usr/lib/git-core/git-sh-prompt ]; then
-    . /usr/lib/git-core/git-sh-prompt
-elif [ -r /usr/share/git/completion/git-prompt.sh ]; then
-    . /usr/share/git/completion/git-prompt.sh
-fi
+__git_branch_segment() {
+    local branch color
 
-GIT_PS1_SHOWDIRTYSTATE=1
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
+    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || return 0
 
-if declare -F __git_ps1 >/dev/null 2>&1; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
-fi
+    color='\[\033[01;32m\]'
+    if ! git diff --no-ext-diff --quiet --exit-code 2>/dev/null || \
+       ! git diff --cached --no-ext-diff --quiet --exit-code 2>/dev/null; then
+        color='\[\033[01;31m\]'
+    fi
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-esac
+    printf ' (%s%s\[\033[00m\])' "$color" "$branch"
+}
+
+__set_bash_prompt() {
+    local prompt_prefix='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]'
+
+    case "$TERM" in
+    xterm*|rxvt*)
+        prompt_prefix="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]${prompt_prefix}"
+        ;;
+    esac
+
+    PS1="${prompt_prefix}$(__git_branch_segment)\n\$ "
+}
+
+PROMPT_COMMAND=__set_bash_prompt
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
